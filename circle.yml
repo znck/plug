@@ -14,4 +14,8 @@ dependencies:
 
 test:
   override:
-    - phpunit -c phpunit.xml
+    - php vendor/bin/phpunit -c phpunit.xml
+
+general:
+  artifacts:
+    - "build"
