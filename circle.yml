@@ -14,7 +14,7 @@ dependencies:
 
 test:
   override:
-    - php vendor/bin/phpunit -c phpunit.xml
+    - php vendor/bin/phpunit -c phpunit.xml --log-junit $CIRCLE_TEST_REPORTS/phpunit/junit.xml
 
 general:
   artifacts:
