@@ -14,7 +14,9 @@ dependencies:
 
 test:
   override:
-    - php vendor/bin/phpunit -c phpunit.xml --log-junit $CIRCLE_TEST_REPORTS/phpunit/junit.xml --coverage-clover $CIRCLE_TEST_REPORTS/logs/clover.xml
+    - php vendor/bin/phpunit
+    - php vendor/bin/coveralls -v
+
 
 general:
   artifacts:
