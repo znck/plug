@@ -3,7 +3,7 @@
 use GrahamCampbell\TestBench\AbstractTestCase;
 use Illuminate\Validation\Factory;
 use Symfony\Component\Translation\Translator;
-use Znck\Plug\Eloquent\ValidationTrait;
+use Znck\Plug\Eloquent\Traits\SelfValidating;
 
 class ValidationTest extends AbstractTestCase
 {
@@ -14,7 +14,7 @@ class ValidationTest extends AbstractTestCase
      */
     protected function prepareStub($methods = [])
     {
-        $stub = $this->getMockBuilder(ValidationTrait::class)->setMethods(array_unique(array_merge($methods, [
+        $stub = $this->getMockBuilder(SelfValidating::class)->setMethods(array_unique(array_merge($methods, [
             'getAttributes',
             'fireValidationEvent',
             'getValidationFactory',
