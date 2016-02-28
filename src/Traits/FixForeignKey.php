@@ -1,8 +1,9 @@
-<?php namespace Znck\Plug\Eloquent\Traits;
+<?php
+
+namespace Znck\Plug\Eloquent\Traits;
 
 trait FixForeignKey
 {
-
     /**
      * Get the default foreign key name for the model.
      *

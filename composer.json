@@ -12,8 +12,7 @@
   "authors": [
     {
       "name": "Rahul Kadyan",
-      "email": "hi@znck.me",
-      "website": "http://znck.me"
+      "email": "hi@znck.me"
     }
   ],
   "autoload": {

@@ -16,7 +16,7 @@ trait SelfDecorating
     /**
      * @var DecoratorFactory
      */
-    private static $decorator;
+    public static $decorator;
 
     public static function bootSelfDecoratingModel()
     {

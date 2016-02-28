@@ -1,11 +1,12 @@
-<?php namespace Znck\Plug\Eloquent\Traits;
+<?php
+
+namespace Znck\Plug\Eloquent\Traits;
 
 use Illuminate\Database\Eloquent\Model;
 use Ramsey\Uuid\Uuid;
 
 trait UuidKey
 {
-
     /**
      * Indicates if the IDs are auto-incrementing.
      *
@@ -15,6 +16,7 @@ trait UuidKey
 
     /**
      * The "booting" method of the model.
+     * @codeCoverageIgnore
      */
     protected static function bootUuidKeyModel()
     {

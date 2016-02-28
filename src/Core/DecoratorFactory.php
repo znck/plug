@@ -1,12 +1,12 @@
-<?php namespace Znck\Plug\Eloquent\Core;
+<?php
+
+namespace Znck\Plug\Eloquent\Core;
 
 use Znck\Plug\Eloquent\Contracts\DecoratorFactory as DecoratorInterface;
-use Znck\Plug\Eloquent\Contracts\string;
-use Znck\Plug\Eloquent\Exceptions\UnknownDecorator;
+use Znck\Plug\Eloquent\Exceptions\UnknownDecoratorException;
 
 class DecoratorFactory implements DecoratorInterface
 {
-
     protected $decorators = [];
 
     public function decorate(string $decoration, $value)
@@ -17,7 +17,7 @@ class DecoratorFactory implements DecoratorInterface
         } elseif (method_exists($this, $method)) {
             $value = call_user_func_array([$this, $method], [$value]);
         } else {
-            throw new UnknownDecorator("There is no ${decoration} sanitizer.");
+            throw new UnknownDecoratorException("There is no ${decoration} sanitizer.");
         }
 
         return $value;
@@ -26,11 +26,6 @@ class DecoratorFactory implements DecoratorInterface
     public function decorateName($value)
     {
         return ucwords($value);
-    }
-
-    public function decoratePhone($value)
-    {
-        return str_replace('[\s]+', '', $value);
     }
 
     public function register(string $decorator, \Closure $handler)

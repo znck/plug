@@ -1,4 +1,6 @@
-<?php namespace Znck\Tests\Plug\Eloquent;
+<?php
+
+namespace Znck\Tests\Plug\Eloquent;
 
 use GrahamCampbell\TestBench\AbstractTestCase;
 use Illuminate\Validation\Factory;
@@ -7,9 +9,9 @@ use Znck\Plug\Eloquent\Traits\SelfValidating;
 
 class ValidationTest extends AbstractTestCase
 {
-
     /**
      * @param array $methods
+     *
      * @return \PHPUnit_Framework_MockObject_MockObject|\Znck\Plug\Eloquent\ValidationTrait
      */
     protected function prepareStub($methods = [])
@@ -23,15 +25,15 @@ class ValidationTest extends AbstractTestCase
         $translator = new Translator('en');
         $factory = new Factory($translator);
 
-        if (! array_has(array_flip($methods), 'fireValidationEvent')) {
+        if (!array_has(array_flip($methods), 'fireValidationEvent')) {
             $stub->expects($this->atLeast(0))->method('fireValidationEvent')->willReturn(true);
         }
 
-        if (! array_has(array_flip($methods), 'getAttributes')) {
+        if (!array_has(array_flip($methods), 'getAttributes')) {
             $stub->expects($this->atLeast(0))->method('getAttributes')->willReturn(['email' => 'foo@example.com']);
         }
 
-        if (! array_has(array_flip($methods), 'getValidationFactory')) {
+        if (!array_has(array_flip($methods), 'getValidationFactory')) {
             $stub->expects($this->atLeast(0))->method('getValidationFactory')->willReturn($factory);
         }
 
@@ -47,8 +49,8 @@ class ValidationTest extends AbstractTestCase
         $this->assertArrayHasKey('email', $stub->getAttributes());
     }
 
-
-    public function test_it_has_no_rules() {
+    public function test_it_has_no_rules()
+    {
         $this->assertEmpty($this->prepareStub()->getValidationRules());
     }
 

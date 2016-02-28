@@ -1,11 +1,12 @@
-<?php namespace Znck\Plug\Eloquent\Traits;
+<?php
+
+namespace Znck\Plug\Eloquent\Traits;
 
 use Illuminate\Contracts\Validation\Factory;
 use Illuminate\Support\MessageBag;
 
 trait SelfValidating
 {
-
     /**
      * Validation rules.
      *
@@ -44,9 +45,8 @@ trait SelfValidating
     /**
      * Register a validating model event with the dispatcher.
      *
-     * @param  \Closure|string $callback
-     * @param  int $priority
-     * @return void
+     * @param \Closure|string $callback
+     * @param int             $priority
      * @codeCoverageIgnore
      */
     public static function validating($callback, $priority = 0)
@@ -57,9 +57,8 @@ trait SelfValidating
     /**
      * Register a validated model event with the dispatcher.
      *
-     * @param  \Closure|string $callback
-     * @param  int $priority
-     * @return void
+     * @param \Closure|string $callback
+     * @param int             $priority
      * @codeCoverageIgnore
      */
     public static function validated($callback, $priority = 0)
@@ -84,7 +83,7 @@ trait SelfValidating
      */
     public function getErrors()
     {
-        return $this->errors ?: new MessageBag;
+        return $this->errors ?: new MessageBag();
     }
 
     /**
@@ -112,14 +111,16 @@ trait SelfValidating
             return false;
         }
 
-        return ! $fails;
+        return !$fails;
     }
 
     /**
      * Fire pre/post validation events.
      *
      * @codeCoverageIgnore
+     *
      * @param string $event
+     *
      * @return mixed
      */
     protected function fireValidationEvent($event)
@@ -131,11 +132,12 @@ trait SelfValidating
      * Validation Factory.
      *
      * @codeCoverageIgnore
+     *
      * @return Factory
      */
     protected function getValidationFactory()
     {
-        if (! ($this->validationFactory instanceof Factory)) {
+        if (!($this->validationFactory instanceof Factory)) {
             $this->validationFactory = app(Factory::class);
         }
 
@@ -174,10 +176,9 @@ trait SelfValidating
 
     /**
      * @codeCoverageIgnore
-     * @return void
      * @static
      */
-    protected static function bootSelfValidatingModel ()
+    protected static function bootSelfValidatingModel()
     {
         static::saving(function ($model) {
             if (method_exists($model, 'validate')) {
