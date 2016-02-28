@@ -1,5 +1,4 @@
 <?php
-
 namespace Znck\Plug\Eloquent\Traits;
 
 use Illuminate\Contracts\Validation\Factory;

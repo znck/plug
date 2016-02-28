@@ -1,5 +1,6 @@
 build
 .coveralls.yml
+.php_cs.cache
 
 # Created by .ignore support plugin (hsz.mobi)
 ### JetBrains template

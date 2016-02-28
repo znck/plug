@@ -1,5 +1,4 @@
 <?php
-
 namespace Znck\Plug\Eloquent\Core;
 
 use Znck\Plug\Eloquent\Contracts\DecoratorFactory as DecoratorInterface;

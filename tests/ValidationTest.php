@@ -1,5 +1,4 @@
 <?php
-
 namespace Znck\Tests\Plug\Eloquent;
 
 use GrahamCampbell\TestBench\AbstractTestCase;
