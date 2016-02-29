@@ -1,6 +1,7 @@
-<?php
-namespace Znck\Plug\Eloquent\Exceptions;
+<?php namespace Znck\Plug\Eloquent\Exceptions;
 
-class UnknownDecoratorException extends \Exception
+use Exception;
+
+class UnknownDecoratorException extends Exception
 {
 }

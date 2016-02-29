@@ -5,7 +5,6 @@ use Znck\Plug\Eloquent\Core\DecoratorFactory;
 
 trait SelfDecorating
 {
-
     /**
      * Mutation rules.
      *

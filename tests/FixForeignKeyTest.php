@@ -5,7 +5,6 @@ use Znck\Plug\Eloquent\Traits\FixForeignKey;
 
 class FixForeignKeyTest extends AbstractTestCase
 {
-
     public function test_it_works()
     {
         $fixer = $this->get();

@@ -1,5 +1,4 @@
-<?php
-namespace Znck\Plug\Eloquent\Traits;
+<?php namespace Znck\Plug\Eloquent\Traits;
 
 use Illuminate\Contracts\Validation\Factory;
 use Illuminate\Support\MessageBag;
@@ -110,7 +109,7 @@ trait SelfValidating
             return false;
         }
 
-        return !$fails;
+        return ! $fails;
     }
 
     /**
@@ -136,7 +135,7 @@ trait SelfValidating
      */
     protected function getValidationFactory()
     {
-        if (!($this->validationFactory instanceof Factory)) {
+        if (! ($this->validationFactory instanceof Factory)) {
             $this->validationFactory = app(Factory::class);
         }
 

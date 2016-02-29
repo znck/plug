@@ -1,5 +1,4 @@
-<?php
-namespace Znck\Tests\Plug\Eloquent;
+<?php namespace Znck\Tests\Plug\Eloquent;
 
 use GrahamCampbell\TestBench\AbstractTestCase;
 use Illuminate\Validation\Factory;
@@ -24,15 +23,15 @@ class ValidationTest extends AbstractTestCase
         $translator = new Translator('en');
         $factory = new Factory($translator);
 
-        if (!array_has(array_flip($methods), 'fireValidationEvent')) {
+        if (! array_has(array_flip($methods), 'fireValidationEvent')) {
             $stub->expects($this->atLeast(0))->method('fireValidationEvent')->willReturn(true);
         }
 
-        if (!array_has(array_flip($methods), 'getAttributes')) {
+        if (! array_has(array_flip($methods), 'getAttributes')) {
             $stub->expects($this->atLeast(0))->method('getAttributes')->willReturn(['email' => 'foo@example.com']);
         }
 
-        if (!array_has(array_flip($methods), 'getValidationFactory')) {
+        if (! array_has(array_flip($methods), 'getValidationFactory')) {
             $stub->expects($this->atLeast(0))->method('getValidationFactory')->willReturn($factory);
         }
 

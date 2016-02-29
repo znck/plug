@@ -1,5 +1,4 @@
-<?php
-namespace Znck\Tests\Plug\Eloquent;
+<?php namespace Znck\Tests\Plug\Eloquent;
 
 use GrahamCampbell\TestBench\AbstractTestCase;
 use Znck\Plug\Eloquent\Core\DecoratorFactory;
@@ -7,7 +6,6 @@ use Znck\Plug\Eloquent\Exceptions\UnknownDecoratorException;
 
 class DecoratorFactoryTest extends AbstractTestCase
 {
-
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject|DecoratorFactory
      */
