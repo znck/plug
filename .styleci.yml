@@ -1,0 +1,13 @@
+preset: recommended
+
+risky: false
+
+linting: true
+
+disabled:
+  - blankline_after_open_tag
+  - namespace_no_leading_whitespace
+
+finder:
+  name:
+    - "*.php"
