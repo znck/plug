@@ -13,7 +13,6 @@ test:
     - php vendor/bin/phpunit
     - php vendor/bin/coveralls -v
 
-
 general:
   artifacts:
     - "build"
