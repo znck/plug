@@ -8,8 +8,8 @@ enabled:
   - logical_not_operators_with_successor_space
 
 disabled:
-  - blankline_after_open_tag
-  - namespace_no_leading_whitespace
+  - blank_line_after_opening_tag
+  - no_leading_namespace_whitespace
 
 finder:
   name:
