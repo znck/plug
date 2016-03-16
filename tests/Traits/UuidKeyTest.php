@@ -1,4 +1,4 @@
-<?php namespace Znck\Tests\Plug\Eloquent;
+<?php namespace Znck\Tests\Plug\Eloquent\Traits;
 
 use GrahamCampbell\TestBench\AbstractTestCase;
 use Ramsey\Uuid\Uuid;

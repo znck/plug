@@ -5,6 +5,7 @@ use Znck\Plug\Eloquent\Core\DecoratorFactory;
 
 trait SelfDecorating
 {
+
     /**
      * Mutation rules.
      *
@@ -15,14 +16,17 @@ trait SelfDecorating
     /**
      * @var DecoratorFactory
      */
-    public static $decorator;
+    protected static $decorator;
 
-    public static function bootSelfDecoratingModel()
+    /**
+     * @codeCoverageIgnore
+     */
+    public static function bootSelfDecorating()
     {
         static::$decorator = Container::getInstance()->make(DecoratorFactory::class);
     }
 
-    private function getDecorations(string $attribute)
+    protected function getDecorations(string $attribute)
     {
         if (array_key_exists($attribute, $this->decorations)) {
             if (is_string($this->decorations[$attribute])) {
@@ -35,16 +39,35 @@ trait SelfDecorating
         return [];
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function setAttribute($key, $value)
     {
         if (array_key_exists($key, $this->decorations)) {
-            $decorations = $this->getDecorations($key);
-
-            $value = array_reduce($decorations, function ($input, $decoration) {
-                return static::$decorator->decorate($decoration, $input);
-            }, $value);
+            $value = $this->decorateAttribute($key, $value);
         }
 
         return parent::setAttribute($key, $value);
+    }
+
+    /**
+     * @param $key
+     * @param $value
+     * @return mixed
+     */
+    public function decorateAttribute($key, $value)
+    {
+        $decorations = $this->getDecorations($key);
+
+        $value = array_reduce(
+            $decorations,
+            function ($input, $decoration) {
+                return static::$decorator->decorate($decoration, $input);
+            },
+            $value
+        );
+
+        return $value;
     }
 }

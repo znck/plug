@@ -16,14 +16,16 @@ trait UuidKey
      * The "booting" method of the model.
      * @codeCoverageIgnore
      */
-    protected static function bootUuidKeyModel()
+    protected static function bootUuidKey()
     {
-        static::creating(function (Model $model) {
-            $key = $model->getKeyName();
-            if (empty($model->$key)) {
-                $model->attributes[$key] = $model->generateNewUuid();
+        static::creating(
+            function (Model $model) {
+                $key = $model->getKeyName();
+                if (empty($model->$key)) {
+                    $model->attributes[$key] = $model->generateNewUuid();
+                }
             }
-        });
+        );
     }
 
     /**

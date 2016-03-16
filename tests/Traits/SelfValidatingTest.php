@@ -1,11 +1,12 @@
-<?php namespace Znck\Tests\Plug\Eloquent;
+<?php namespace Znck\Tests\Plug\Eloquent\Traits;
 
 use GrahamCampbell\TestBench\AbstractTestCase;
+use Illuminate\Support\MessageBag;
 use Illuminate\Validation\Factory;
 use Symfony\Component\Translation\Translator;
 use Znck\Plug\Eloquent\Traits\SelfValidating;
 
-class ValidationTest extends AbstractTestCase
+class SelfValidatingTest extends AbstractTestCase
 {
     /**
      * @param array $methods
@@ -18,6 +19,7 @@ class ValidationTest extends AbstractTestCase
             'getAttributes',
             'fireValidationEvent',
             'getValidationFactory',
+            'getRelations',
         ])))->getMockForTrait();
 
         $translator = new Translator('en');
@@ -33,6 +35,10 @@ class ValidationTest extends AbstractTestCase
 
         if (! array_has(array_flip($methods), 'getValidationFactory')) {
             $stub->expects($this->atLeast(0))->method('getValidationFactory')->willReturn($factory);
+        }
+
+        if (! array_has(array_flip($methods), 'getRelations')) {
+            $stub->expects($this->atLeast(0))->method('getRelations')->willReturn([]);
         }
 
         return $stub;
@@ -153,5 +159,17 @@ class ValidationTest extends AbstractTestCase
         $stub->validate();
 
         $this->assertArrayHasKey('::validated', $stub->getErrors()->toArray());
+    }
+
+    public function test_it_collects_errors() {
+        $stub = $this->prepareStub(['getRelations']);
+
+        $mock = $this->getMockBuilder(\Znck\Plug\Eloquent\Contracts\SelfValidating::class)->setMethods(['hasErrors', 'getErrors'])->getMockForAbstractClass();
+        $mock->expects($this->once())->method('hasErrors')->willReturn(true);
+        $mock->expects($this->once())->method('getErrors')->willReturn(new MessageBag());
+
+        $stub->expects($this->once())->method('getRelations')->willReturn([$mock]);
+
+        $stub->getErrors();
     }
 }

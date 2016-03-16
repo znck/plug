@@ -2,8 +2,9 @@
 
 use Illuminate\Contracts\Validation\Factory;
 use Illuminate\Support\MessageBag;
+use Znck\Plug\Eloquent\Contracts\SelfValidating as SelfValidatingInterface;
 
-trait SelfValidating
+trait SelfValidating #extends \Illuminate\Database\Eloquent\Model
 {
     /**
      * Validation rules.
@@ -41,10 +42,15 @@ trait SelfValidating
     private $validationFactory = null;
 
     /**
+     * @var bool
+     */
+    private $validationDirty = true;
+
+    /**
      * Register a validating model event with the dispatcher.
      *
      * @param \Closure|string $callback
-     * @param int             $priority
+     * @param int $priority
      * @codeCoverageIgnore
      */
     public static function validating($callback, $priority = 0)
@@ -56,7 +62,7 @@ trait SelfValidating
      * Register a validated model event with the dispatcher.
      *
      * @param \Closure|string $callback
-     * @param int             $priority
+     * @param int $priority
      * @codeCoverageIgnore
      */
     public static function validated($callback, $priority = 0)
@@ -81,7 +87,23 @@ trait SelfValidating
      */
     public function getErrors()
     {
-        return $this->errors ?: new MessageBag();
+        if (! $this->errors) {
+            $this->errors = new MessageBag();
+        }
+
+        if ($this->validationDirty) {
+            $this->validationDirty = false;
+
+            foreach($this->getRelations() as $key => $relation) {
+                if ($relation instanceof SelfValidatingInterface) {
+                    if ($relation->hasErrors()) {
+                        $this->errors->merge([$key => $relation->getErrors()->toArray()]);
+                    }
+                }
+            }
+        }
+
+        return $this->errors;
     }
 
     /**
@@ -91,25 +113,32 @@ trait SelfValidating
      */
     public function validate()
     {
-        if (false === $this->fireValidationEvent('validating')) {
-            $this->errors = $this->getErrors()->add('::validating', 'validation.pre_validation');
+        $this->validationDirty = true;
 
+        if (false === $this->fireValidationEvent('validating')) {
+            $this->errors = $this->errors ?? new MessageBag();
+            $this->errors->add('::validating', 'Pre-validation event returned false.');
             return false;
         }
 
-        $validator = $this->getValidationFactory()->make($this->getAttributes(), $this->getValidationRules(),
-            $this->getValidationMessages(), $this->getValidationCustomAttributes());
+        $validator = $this->getValidationFactory()->make(
+            $this->getAttributes(),
+            $this->getValidationRules(),
+            $this->getValidationMessages(),
+            $this->getValidationCustomAttributes()
+        );
+
         if ($fails = $validator->fails()) {
             $this->errors = $validator->getMessageBag();
         }
 
         if (false === $this->fireValidationEvent('validated')) {
-            $this->errors = $this->getErrors()->add('::validated', 'validation.post_validation');
-
+            $this->errors = $this->errors ?? new MessageBag();
+            $this->errors->add('::validated', 'Post-validation event returned false.');
             return false;
         }
 
-        return ! $fails;
+        return !$fails;
     }
 
     /**
@@ -135,7 +164,7 @@ trait SelfValidating
      */
     protected function getValidationFactory()
     {
-        if (! ($this->validationFactory instanceof Factory)) {
+        if (!($this->validationFactory instanceof Factory)) {
             $this->validationFactory = app(Factory::class);
         }
 
@@ -176,22 +205,26 @@ trait SelfValidating
      * @codeCoverageIgnore
      * @static
      */
-    protected static function bootSelfValidatingModel()
+    protected static function bootSelfValidating()
     {
-        static::saving(function ($model) {
-            if (method_exists($model, 'validate')) {
-                return $model->validate();
+        static::saving(
+            function ($model) {
+                if (method_exists($model, 'validate')) {
+                    return $model->validate();
+                }
+
+                return true;
             }
+        );
 
-            return true;
-        });
+        static::updating(
+            function ($model) {
+                if (method_exists($model, 'validate')) {
+                    return $model->validate();
+                }
 
-        static::updating(function ($model) {
-            if (method_exists($model, 'validate')) {
-                return $model->validate();
+                return true;
             }
-
-            return true;
-        });
+        );
     }
 }
