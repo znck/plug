@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e3fe53421c5d77df61f1eebb386672c5",
-    "content-hash": "f7016f5e30274d6977eeef92e7fb101e",
+    "hash": "55a42d88377dba616e170aa759518558",
+    "content-hash": "840276e12201c8a42865217fc39e28fc",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -1846,6 +1846,55 @@
                 "environment"
             ],
             "time": "2015-12-29 15:10:30"
+        },
+        {
+            "name": "znck/belongs-to-through",
+            "version": "v2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/znck/belongs-to-through.git",
+                "reference": "8c035e2595d8f12dd997bde3c30e9bbf8a01d31d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/znck/belongs-to-through/zipball/8c035e2595d8f12dd997bde3c30e9bbf8a01d31d",
+                "reference": "8c035e2595d8f12dd997bde3c30e9bbf8a01d31d",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": ">4.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "~3.0",
+                "phpunit/phpunit": "~5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Znck\\Eloquent\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rahul Kadyan",
+                    "email": "hi@znck.me"
+                }
+            ],
+            "description": "Adds belongsToThrough relation to laravel models",
+            "homepage": "https://github.com/znck/belongs-to-through",
+            "keywords": [
+                "belongsToThrough",
+                "eloquent",
+                "laravel",
+                "model",
+                "models",
+                "znck"
+            ],
+            "time": "2016-02-03 14:10:58"
         }
     ],
     "packages-dev": [

@@ -30,7 +30,8 @@
     "illuminate/support": "^5.2",
     "illuminate/database": "^5.2",
     "illuminate/validation": "^5.2",
-    "ramsey/uuid": "^3.2"
+    "ramsey/uuid": "^3.2",
+    "znck/belongs-to-through": "^2.2"
   },
   "require-dev": {
     "graham-campbell/testbench": "^3.1",
