@@ -161,7 +161,8 @@ class SelfValidatingTest extends AbstractTestCase
         $this->assertArrayHasKey('::validated', $stub->getErrors()->toArray());
     }
 
-    public function test_it_collects_errors() {
+    public function test_it_collects_errors()
+    {
         $stub = $this->prepareStub(['getRelations']);
 
         $mock = $this->getMockBuilder(\Znck\Plug\Eloquent\Contracts\SelfValidating::class)->setMethods(['hasErrors', 'getErrors'])->getMockForAbstractClass();

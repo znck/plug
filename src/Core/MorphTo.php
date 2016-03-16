@@ -4,7 +4,6 @@ use Illuminate\Database\Eloquent\Relations\MorphTo as OriginalMorphTo;
 
 class MorphTo extends OriginalMorphTo
 {
-
     /**
      * @codeCoverageIgnore
      */

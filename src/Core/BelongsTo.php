@@ -4,7 +4,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo as OriginalBelongsTo;
 
 class BelongsTo extends OriginalBelongsTo
 {
-
     /**
      * @codeCoverageIgnore
      */
@@ -23,5 +22,4 @@ class BelongsTo extends OriginalBelongsTo
 
         return array_values(array_unique($keys));
     }
-
 }

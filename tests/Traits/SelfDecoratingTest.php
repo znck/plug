@@ -28,5 +28,4 @@ class SelfDecoratingTest extends AbstractTestCase
 
         $this->assertEquals('Rahul Kadyan', $decorating->decorateAttribute('name', 'rahul kadyan'));
     }
-
 }

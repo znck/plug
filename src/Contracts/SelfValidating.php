@@ -2,7 +2,6 @@
 
 interface SelfValidating
 {
-
     /**
      * Check if model has validation errors.
      *

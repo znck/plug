@@ -14,6 +14,7 @@ trait UuidKey
 
     /**
      * The "booting" method of the model.
+     *
      * @codeCoverageIgnore
      */
     protected static function bootUuidKey()

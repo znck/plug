@@ -36,7 +36,7 @@ trait FixMorphTo #extends \Illuminate\Database\Eloquent\Model
         else {
             $class = $this->getActualClassNameForMorph($class);
 
-            $instance = new $class;
+            $instance = new $class();
 
             return new MorphTo(
                 $instance->newQuery(), $this, $id, $instance->getKeyName(), $type, $name

@@ -94,7 +94,7 @@ trait SelfValidating #extends \Illuminate\Database\Eloquent\Model
         if ($this->validationDirty) {
             $this->validationDirty = false;
 
-            foreach($this->getRelations() as $key => $relation) {
+            foreach ($this->getRelations() as $key => $relation) {
                 if ($relation instanceof SelfValidatingInterface) {
                     if ($relation->hasErrors()) {
                         $this->errors->merge([$key => $relation->getErrors()->toArray()]);
@@ -138,7 +138,7 @@ trait SelfValidating #extends \Illuminate\Database\Eloquent\Model
             return false;
         }
 
-        return !$fails;
+        return ! $fails;
     }
 
     /**
@@ -164,7 +164,7 @@ trait SelfValidating #extends \Illuminate\Database\Eloquent\Model
      */
     protected function getValidationFactory()
     {
-        if (!($this->validationFactory instanceof Factory)) {
+        if (! ($this->validationFactory instanceof Factory)) {
             $this->validationFactory = app(Factory::class);
         }
 

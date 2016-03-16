@@ -5,7 +5,6 @@ use Znck\Plug\Eloquent\Core\DecoratorFactory;
 
 trait SelfDecorating
 {
-
     /**
      * Mutation rules.
      *
@@ -54,6 +53,7 @@ trait SelfDecorating
     /**
      * @param $key
      * @param $value
+     *
      * @return mixed
      */
     public function decorateAttribute($key, $value)

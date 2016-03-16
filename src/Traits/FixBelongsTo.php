@@ -6,7 +6,6 @@ use Znck\Plug\Eloquent\Core\BelongsTo;
 
 class FixBelongsTo extends Model
 {
-
     /**
      * @codeCoverageIgnore
      */
@@ -28,7 +27,7 @@ class FixBelongsTo extends Model
             $foreignKey = Str::snake($relation).'_id';
         }
 
-        $instance = new $related;
+        $instance = new $related();
 
         // Once we have the foreign key names, we'll just create a new Eloquent query
         // for the related models and returns the relationship instance which will
@@ -39,5 +38,4 @@ class FixBelongsTo extends Model
 
         return new BelongsTo($query, $this, $foreignKey, $otherKey, $relation);
     }
-
 }
