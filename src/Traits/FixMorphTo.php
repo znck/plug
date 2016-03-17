@@ -3,7 +3,7 @@
 use Illuminate\Support\Str;
 use Znck\Plug\Eloquent\Core\MorphTo;
 
-trait FixMorphTo #extends \Illuminate\Database\Eloquent\Model
+trait FixMorphTo //extends \Illuminate\Database\Eloquent\Model
 {
     /**
      * @codeCoverageIgnore
