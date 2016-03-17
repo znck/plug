@@ -5,7 +5,7 @@ use Ramsey\Uuid\Uuid;
 
 trait UuidKey
 {
-    // Class using UuidKey should set `public $incrementing = false;`
+    // Set `public $incrementing = false;`
 
     /**
      * The "booting" method of the model.
