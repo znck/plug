@@ -4,7 +4,7 @@ use Illuminate\Contracts\Validation\Factory;
 use Illuminate\Support\MessageBag;
 use Znck\Plug\Eloquent\Contracts\SelfValidating as SelfValidatingInterface;
 
-trait SelfValidating #extends \Illuminate\Database\Eloquent\Model
+trait SelfValidating //extends \Illuminate\Database\Eloquent\Model
 {
     /**
      * Validation rules.
@@ -50,7 +50,7 @@ trait SelfValidating #extends \Illuminate\Database\Eloquent\Model
      * Register a validating model event with the dispatcher.
      *
      * @param \Closure|string $callback
-     * @param int $priority
+     * @param int             $priority
      * @codeCoverageIgnore
      */
     public static function validating($callback, $priority = 0)
@@ -62,7 +62,7 @@ trait SelfValidating #extends \Illuminate\Database\Eloquent\Model
      * Register a validated model event with the dispatcher.
      *
      * @param \Closure|string $callback
-     * @param int $priority
+     * @param int             $priority
      * @codeCoverageIgnore
      */
     public static function validated($callback, $priority = 0)
@@ -118,6 +118,7 @@ trait SelfValidating #extends \Illuminate\Database\Eloquent\Model
         if (false === $this->fireValidationEvent('validating')) {
             $this->errors = $this->errors ?? new MessageBag();
             $this->errors->add('::validating', 'Pre-validation event returned false.');
+
             return false;
         }
 
@@ -135,6 +136,7 @@ trait SelfValidating #extends \Illuminate\Database\Eloquent\Model
         if (false === $this->fireValidationEvent('validated')) {
             $this->errors = $this->errors ?? new MessageBag();
             $this->errors->add('::validated', 'Post-validation event returned false.');
+
             return false;
         }
 
