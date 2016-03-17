@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Znck\Plug\Eloquent\Core\BelongsTo;
 
-trait FixBelongsTo extends Model
+trait FixBelongsTo #extends Model
 {
     /**
      * @codeCoverageIgnore
