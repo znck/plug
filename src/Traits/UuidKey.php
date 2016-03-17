@@ -5,12 +5,7 @@ use Ramsey\Uuid\Uuid;
 
 trait UuidKey
 {
-    /**
-     * Indicates if the IDs are auto-incrementing.
-     *
-     * @var bool
-     */
-    public $incrementing = false;
+    // Class using UuidKey should set `public $incrementing = false;`
 
     /**
      * The "booting" method of the model.
