@@ -180,7 +180,41 @@ trait SelfValidating //extends \Illuminate\Database\Eloquent\Model
      */
     public function getValidationRules()
     {
-        return $this->rules;
+        return $this->fixRules($this->rules);
+    }
+
+    protected function fixRules($rules)
+    {
+        foreach ($rules as $key => $rule) {
+            $subRules = is_string($rule) ? explode('|', $rule) : $rule;
+            foreach ($subRules as $index => $subRule) {
+                if (str_contains($subRule, 'unique')) {
+                    $fields = explode(',', substr($subRule, 7));
+                    $table = array_shift($fields);
+                    $column = array_shift($fields) ?: $key;
+                    array_shift($fields); // id
+                    $primary = array_shift($fields);
+                    $where = [];
+                    for ($i = 0; $i < count($fields); $i += 2) {
+                        $where[$fields[$i]] = array_get($fields, $i + 1, null);
+                    }
+                    $fields = [];
+                    foreach ($where as $k => $v) {
+                        $fields[] = $k;
+                        $fields[] = ($v === null or 0 === strcmp($v, 'null')) ? array_get($this->attributes, $k) : $v;
+                    }
+                    if (count($fields)) {
+                        array_unshift($fields, $primary);
+                    }
+                    array_unshift($fields, $this->exists ? $this->getKey() : 'NULL');
+                    array_unshift($fields, $column);
+                    $subRule = 'unique:'.$table.','.implode(',', $fields);
+                    $subRules[$index] = $subRule;
+                    $rules[$key] = $subRules;
+                }
+            }
+        }
+        return $rules;
     }
 
     /**
