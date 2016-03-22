@@ -2,7 +2,7 @@ Plug
 ====
 A collection of pluggable [Eloquent](https://laravel.com/docs/master/eloquent) traits to enhance your Models.
 
-![Laravel Plug](cover.png)
+![Plug](cover.png)
 
 <p align="center">
   <a href="https://styleci.io/repos/50701599">
@@ -119,6 +119,32 @@ It allows to usage of non-incrementing UUID primary keys.
   }
   ```
 
+## Change log
+
+Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
+
+## Testing
+
+``` bash
+$ composer test
+```
+
+## Contributing
+
+Please see [CONTRIBUTING](CONTRIBUTING.md) and [CONDUCT](CONDUCT.md) for details.
+
+## Security
+
+If you discover any security related issues, please email :author_email instead of using the issue tracker.
+
+## Credits
+
+- [Rahul Kadyan][link-author]
+- [All Contributors][link-contributors]
+
 ## License
 
-Plug is licensed under [The MIT License (MIT)](LICENSE).
+The MIT License (MIT). Please see [License File](LICENSE) for more information.
+
+[link-author]: https://github.com/znck
+[link-contributors]: ../../contributors
