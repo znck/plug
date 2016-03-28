@@ -1,6 +1,8 @@
 <?php namespace Znck\Plug\Eloquent\Traits;
 
 use Illuminate\Contracts\Validation\Factory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 use Illuminate\Support\MessageBag;
 use Znck\Plug\Eloquent\Contracts\SelfValidating as SelfValidatingInterface;
 
@@ -95,9 +97,21 @@ trait SelfValidating //extends \Illuminate\Database\Eloquent\Model
             $this->validationDirty = false;
 
             foreach ($this->getRelations() as $key => $relation) {
-                if ($relation instanceof SelfValidatingInterface) {
+                if ($this->isSelfValidating($relation)) {
                     if ($relation->hasErrors()) {
                         $this->errors->merge([$key => $relation->getErrors()->toArray()]);
+                    }
+                } elseif ($relation instanceof Collection) {
+                    $localErrors = [];
+                    foreach ($relation as $index => $model) {
+                        if ($this->isSelfValidating($model)) {
+                            if ($model->hasErrors()) {
+                                $localErrors[$index] = $model->getErrors()->toArray();
+                            }
+                        }
+                    }
+                    if (count($localErrors)) {
+                        $this->errors->merge([$key => $localErrors]);
                     }
                 }
             }
@@ -262,5 +276,18 @@ trait SelfValidating //extends \Illuminate\Database\Eloquent\Model
                 return true;
             }
         );
+    }
+
+    /**
+     * @param $relation
+     *
+     * @return bool
+     */
+    private function isSelfValidating($relation)
+    {
+        if ($relation instanceof Model) {
+            return array_has(array_flip(class_implements($relation)), SelfValidatingInterface::class);
+        }
+        return false;
     }
 }
