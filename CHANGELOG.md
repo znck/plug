@@ -2,6 +2,13 @@
 
 All Notable changes to `plug` will be documented in this file.
 
+## [Unpublished]
+
+## [0.1.7] - 2016-03-28
+
+### Fixed
+- SelfValidating trait `getErrors` and `hasError` should check errors on all relations.
+
 ## [0.1.6] - 2016-03-21
 
 ### Added
@@ -36,7 +43,8 @@ All Notable changes to `plug` will be documented in this file.
 ### Added
 - Added `FixBelongsTo`, `FixMorphTo`, `SelfDecorating`, `SelfValidating` and `UuidKey` traits.
 
-[Unpublished]: https://github.com/znck/plug/compare/v0.1.6...HEAD
+[Unpublished]: https://github.com/znck/plug/compare/v0.1.7...HEAD
+[0.1.7]: https://github.com/znck/plug/compare/v0.1.6...v0.1.7
 [0.1.6]: https://github.com/znck/plug/compare/v0.1.5...v0.1.6
 [0.1.5]: https://github.com/znck/plug/compare/v0.1.4...v0.1.5
 [0.1.4]: https://github.com/znck/plug/compare/v0.1.3...v0.1.4
