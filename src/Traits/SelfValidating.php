@@ -285,9 +285,6 @@ trait SelfValidating //extends \Illuminate\Database\Eloquent\Model
      */
     private function isSelfValidating($relation)
     {
-        if ($relation instanceof Model) {
-            return array_has(array_flip(class_implements($relation)), SelfValidatingInterface::class);
-        }
-        return false;
+        return $relation instanceof SelfValidatingInterface;
     }
 }

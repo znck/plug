@@ -4,6 +4,7 @@ use GrahamCampbell\TestBench\AbstractTestCase;
 use Illuminate\Support\MessageBag;
 use Illuminate\Validation\Factory;
 use Symfony\Component\Translation\Translator;
+use Znck\Plug\Eloquent\Contracts\SelfValidating as SelfValidatingInterface;
 use Znck\Plug\Eloquent\Traits\SelfValidating;
 
 class SelfValidatingTest extends AbstractTestCase
@@ -165,12 +166,14 @@ class SelfValidatingTest extends AbstractTestCase
     {
         $stub = $this->prepareStub(['getRelations']);
 
-        $mock = $this->getMockBuilder(\Znck\Plug\Eloquent\Contracts\SelfValidating::class)->setMethods(['hasErrors', 'getErrors'])->getMockForAbstractClass();
+        $mock = $this->getMockBuilder(SelfValidatingInterface::class)->setMethods(['hasErrors', 'getErrors'])->getMockForAbstractClass();
         $mock->expects($this->once())->method('hasErrors')->willReturn(true);
         $mock->expects($this->once())->method('getErrors')->willReturn(new MessageBag());
 
+        $this->assertTrue($mock instanceof SelfValidatingInterface);
+
         $stub->expects($this->once())->method('getRelations')->willReturn([$mock]);
 
-        $stub->getErrors();
+        $stub->hasErrors();
     }
 }
