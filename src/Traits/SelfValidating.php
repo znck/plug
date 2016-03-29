@@ -99,7 +99,7 @@ trait SelfValidating //extends \Illuminate\Database\Eloquent\Model
             foreach ($this->getRelations() as $key => $relation) {
                 if ($this->isSelfValidating($relation)) {
                     if ($relation->hasErrors()) {
-                        $this->errors->merge([$key => $relation->getErrors()->toArray()]);
+                        $this->errors->merge([$this->getRelationNameForError($key) => $relation->getErrors()->toArray()]);
                     }
                 } elseif ($relation instanceof Collection) {
                     $localErrors = [];
@@ -111,13 +111,17 @@ trait SelfValidating //extends \Illuminate\Database\Eloquent\Model
                         }
                     }
                     if (count($localErrors)) {
-                        $this->errors->merge([$key => $localErrors]);
+                        $this->errors->merge([$this->getRelationNameForError($key) => $localErrors]);
                     }
                 }
             }
         }
 
         return $this->errors;
+    }
+
+    public function getRelationNameForError ($key) {
+        return $key;
     }
 
     /**
