@@ -4,6 +4,11 @@ All Notable changes to `plug` will be documented in this file.
 
 ## [Unpublished]
 
+## [0.1.8] - 2016-03-29
+
+### Fixed
+- SelfValidating trait use `instanceof` instead `class_implements`. 
+
 ## [0.1.7] - 2016-03-28
 
 ### Fixed
@@ -43,7 +48,8 @@ All Notable changes to `plug` will be documented in this file.
 ### Added
 - Added `FixBelongsTo`, `FixMorphTo`, `SelfDecorating`, `SelfValidating` and `UuidKey` traits.
 
-[Unpublished]: https://github.com/znck/plug/compare/v0.1.7...HEAD
+[Unpublished]: https://github.com/znck/plug/compare/v0.1.8...HEAD
+[0.1.8]: https://github.com/znck/plug/compare/v0.1.7...v0.1.8
 [0.1.7]: https://github.com/znck/plug/compare/v0.1.6...v0.1.7
 [0.1.6]: https://github.com/znck/plug/compare/v0.1.5...v0.1.6
 [0.1.5]: https://github.com/znck/plug/compare/v0.1.4...v0.1.5
