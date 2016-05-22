@@ -8,7 +8,7 @@ class DecoratorFactory implements DecoratorInterface
 {
     protected $decorators = [];
 
-    public function decorate(string $decoration, $value)
+    public function decorate(string $decoration, $value, array $arguments = [])
     {
         $method = 'decorate'.studly_case($decoration);
         if (array_key_exists($decoration, $this->decorators)) {

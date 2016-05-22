@@ -1,4 +1,4 @@
-build
+build/
 .coveralls.yml
 .php_cs.cache
 
@@ -105,4 +105,3 @@ sftp-config.json
 
 # Linux trash folder which might appear on any partition or disk
 .Trash-*
-
