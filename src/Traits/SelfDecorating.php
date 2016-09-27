@@ -3,6 +3,12 @@
 use Illuminate\Container\Container;
 use Znck\Plug\Eloquent\Core\DecoratorFactory;
 
+/**
+ * Class SelfDecorating
+ *
+ * @package Znck\Plug\Eloquent\Traits
+ * @deprecated
+ */
 trait SelfDecorating
 {
     /**

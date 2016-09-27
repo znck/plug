@@ -2,6 +2,12 @@
 
 use Illuminate\Support\Str;
 
+/**
+ * Class SnakeCasedRelationName
+ *
+ * @package Znck\Plug\Eloquent\Traits
+ * @deprecated
+ */
 trait SnakeCasedRelationName
 {
     /**

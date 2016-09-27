@@ -6,6 +6,12 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\MessageBag;
 use Znck\Plug\Eloquent\Contracts\SelfValidating as SelfValidatingInterface;
 
+/**
+ * Class SelfValidating
+ *
+ * @package Znck\Plug\Eloquent\Traits
+ * @deprecated
+ */
 trait SelfValidating //extends \Illuminate\Database\Eloquent\Model
 {
     /**

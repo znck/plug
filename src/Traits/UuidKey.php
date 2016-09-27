@@ -25,7 +25,7 @@ trait UuidKey
     }
 
     /**
-     * Get a new version 5 (random) UUID.
+     * Get a new version 4 (random) UUID.
      */
     public function generateNewUuid()
     {
