@@ -101,13 +101,11 @@ Eloquent has misleading behavior when guessing foreign key field name. It takes 
 1. **FixMorphTo**  
 Relation class `MorphTo` inherits `BelongsTo`, so it is prone to same bug.
 
-1. **SelfDecorating**  
+1. ~~**SelfDecorating**~~ @deprecated   
 It keeps database entries clean. For example: values in `name` column should start with uppercase letter.
-> Add detailed documentation.
 
-1. **SelfValidating**  
+1. ~~**SelfValidating**~~ @deprecated in favour of [znck/repository](https://github.com/znck/repository)   
 It validates attributes before saving or updating, hence only valid data goes in database.
-> Add detailed documentation.
 
 1. **UuidKey**  
 It allows to usage of non-incrementing UUID primary keys.
